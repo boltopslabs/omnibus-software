@@ -85,4 +85,20 @@ build do
 
   make "-j #{workers}", env: env
   make "-j #{workers} install", env: env
+
+  # This builds C++ code - so we need libstdc++ to be deployed in our
+  # embedded bin directory.
+  #
+  # TODO: Maybe combine this code with the code from ruby.rb and delivery-cli.rb
+  # and put it all in a common "stdlib" prerequisite or something like that?
+  if windows?
+    mingw = ENV["MSYSTEM"].downcase
+    msys_path = ENV["OMNIBUS_TOOLCHAIN_INSTALL_DIR"] ? "#{ENV["OMNIBUS_TOOLCHAIN_INSTALL_DIR"]}/embedded/bin" : "C:/msys2"
+    windows_path = "#{msys_path}/#{mingw}/bin/libstdc++-6.dll"
+    if File.exist?(windows_path)
+      copy windows_path, "#{install_dir}/embedded/bin/libstdc++-6.dll"
+    else
+      raise "Cannot find required DLL needed for dynamic linking: #{windows_path}"
+    end
+  end
 end
