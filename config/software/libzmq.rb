@@ -71,7 +71,7 @@ build do
   end
 
   # Some test files use inet_pton which is not readily available on windows.
-  if version.satisfies?(">= 4") and version.satisfies?("< 4.1") and windows?
+  if version.satisfies?(">= 4") && version.satisfies?("< 4.1") && windows?
     patch source: "zeromq-4.0.11_mingw_inet_pton.patch", env: env
   end
 
