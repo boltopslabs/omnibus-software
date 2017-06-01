@@ -15,7 +15,7 @@
 #
 
 name "setuptools"
-default_version "0.7.7"
+default_version "36.0.1"
 
 license "Python Software Foundation"
 license_file "https://raw.githubusercontent.com/pypa/setuptools/master/LICENSE"
@@ -23,19 +23,11 @@ skip_transitive_dependency_licensing true
 
 dependency "python"
 
-version "0.9.8" do
-  source md5: "243076241781935f7fcad370195a4291"
+version "36.0.1" do
+  source md5: "430eb106788183eefe9f444a300007f0"
 end
 
-version "0.7.7" do
-  source md5: "0d7bc0e1a34b70a97e706ef74aa7f37f"
-end
-
-version "20.0" do
-  source md5: "fb22b2474ca037e0b08f3c3b293e02e6"
-end
-
-source url: "https://pypi.python.org/packages/source/s/setuptools/setuptools-#{version}.tar.gz"
+source url: "https://pypi.python.org/packages/a9/23/720c7558ba6ad3e0f5ad01e0d6ea2288b486da32f053c73e259f7c392042/setuptools-36.0.1.zip"
 
 relative_path "setuptools-#{version}"
 
