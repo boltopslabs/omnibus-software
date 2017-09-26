@@ -24,7 +24,7 @@ skip_transitive_dependency_licensing true
 dependency "config_guess"
 
 version "0.28-1" do
-  source md5: "61f05feb6bab0a6bbfab4b6e3b2f44b6"
+  source md5: "cb530d737c8f2d1023797cf0587b4e05"
 end
 
 source url: "http://downloads.sourceforge.net/project/pkgconfiglite/#{version}/pkg-config-lite-#{version}.tar.gz"
