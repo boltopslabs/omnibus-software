@@ -26,7 +26,7 @@ dependency "ncurses"
 dependency "config_guess"
 
 version "8.38" do
-  source md5: "8a353fe1450216b6655dfcf3561716d9"
+  source md5: "cb530d737c8f2d1023797cf0587b4e05"
 end
 
 version "8.31" do
