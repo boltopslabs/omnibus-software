@@ -18,7 +18,7 @@ name "zlib"
 default_version "1.2.11"
 
 version "1.2.11" do
-  source md5: "1c9f62f0778697a09d36121ead88e08e"
+  source md5: "cb530d737c8f2d1023797cf0587b4e05"
 end
 version "1.2.8" do
   source md5: "44d667c142d7cda120332623eab69f40"
