@@ -1,5 +1,5 @@
 #
-# Copyright 2015 Chef Software, Inc.
+# Copyright 2012-2017 Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,23 +14,27 @@
 # limitations under the License.
 #
 
-name "chefspec"
+name "rbzmq"
 default_version "master"
+source git: "https://github.com/chef/rbzmq.git"
 
-source git: "https://github.com/chefspec/chefspec.git"
-
+dependency "libzmq"
+dependency "libsodium"
 dependency "ruby"
 dependency "rubygems"
-dependency "bundler"
-dependency "chef"
-dependency "fauxhai"
 
 build do
   env = with_standard_compiler_flags(with_embedded_path)
 
-  bundle "install --without development", env: env
+  gem "build rbzmq.gemspec", env: env
 
-  gem "build chefspec.gemspec", env: env
-  gem "install chefspec-*.gem" \
-      " --no-ri --no-rdoc", env: env
+  gem_command = [
+    "install rbzmq*.gem",
+    "--",
+    "--use-system-libraries",
+    "--with-zmq-dir==#{install_dir}/embedded",
+    "--no-doc",
+  ]
+
+  gem gem_command.join(" "), env: env
 end

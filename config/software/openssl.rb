@@ -25,13 +25,16 @@ dependency "cacerts"
 dependency "makedepend" unless aix? || windows?
 dependency "openssl-fips" if fips_mode?
 
-default_version "1.0.2l"
+default_version "1.0.2n"
 
 # OpenSSL source ships with broken symlinks which windows doesn't allow.
 # Skip error checking.
 source url: "https://www.openssl.org/source/openssl-#{version}.tar.gz", extract: :lax_tar
 
+version("1.1.0g") { source sha256: "de4d501267da39310905cb6dc8c6121f7a2cad45a7707f76df828fe1b85073af" }
 version("1.1.0f") { source sha256: "12f746f3f2493b2f39da7ecf63d7ee19c6ac9ec6a4fcd8c229da8a522cb12765" }
+version("1.0.2n") { source sha256: "370babb75f278c39e0c50e8c4e7493bc0f18db6867478341a832a982fd15a8fe" }
+version("1.0.2m") { source sha256: "8c6ff15ec6b319b50788f42c7abc2890c08ba5a1cdcd3810eb9092deada37b0f" }
 version("1.0.2l") { source sha256: "ce07195b659e75f4e1db43552860070061f156a98bb37b672b101ba6e3ddf30c" }
 version("1.0.2k") { source sha256: "6b3977c61f2aedf0f96367dcfb5c6e578cf37e7b8d913b4ecb6643c3cb88d8c0" }
 version("1.0.2j") { source sha256: "e7aff292be21c259c6af26469c7a9b3ba26e9abaaffd325e3dccc9785256c431" }
@@ -127,7 +130,11 @@ build do
                 env
               end
 
-  patch source: "openssl-1.0.1f-do-not-build-docs.patch", env: patch_env
+  if version.start_with? "1.0"
+    patch source: "openssl-1.0.1f-do-not-build-docs.patch", env: patch_env
+  elsif version.start_with? "1.1"
+    patch source: "openssl-1.1.0f-do-not-install-docs.patch", env: patch_env
+  end
 
   if version == "1.0.2k"
     patch source: "openssl-1.0.2k-no-bang.patch", env: patch_env, plevel: 1
