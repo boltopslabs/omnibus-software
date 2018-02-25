@@ -27,7 +27,7 @@ version "38.5.1" do
   source md5: "1705ae74b04d1637f604c336bb565720"
 end
 
-source url: "https://pypi.python.org/packages/6c/54/f7e9cea6897636a04e74c3954f0d8335cc38f7d01e27eec98026b049a300/setuptools-38.5.1.zip#md5=1705ae74b04d1637f604c336bb565720"
+source url: "https://pypi.python.org/packages/6c/54/f7e9cea6897636a04e74c3954f0d8335cc38f7d01e27eec98026b049a300/setuptools-38.5.1.zip"
 
 relative_path "setuptools-#{version}"
 
