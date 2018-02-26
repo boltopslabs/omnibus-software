@@ -41,13 +41,12 @@ build do
   if mac_os_x?
     os_x_release = ohai["platform_version"].match(/([0-9]+\.[0-9]+).*/).captures[0]
     env["MACOSX_DEPLOYMENT_TARGET"] = os_x_release
-    system_expat = " --with-system-expat"
   end
 
   command "./configure" \
            " --prefix=#{install_dir}/embedded" \
            " --enable-shared" \
-          "#{system_expat}" \
+           " --with-system-expat" \ # TODO: is --with-system-expat okay?
            " --with-dbmliborder=", env: env
 
   make env: env
