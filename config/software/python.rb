@@ -43,10 +43,11 @@ build do
     env["MACOSX_DEPLOYMENT_TARGET"] = os_x_release
   end
 
+  # TODO: is --with-system-expat okay?
   command "./configure" \
            " --prefix=#{install_dir}/embedded" \
            " --enable-shared" \
-           " --with-system-expat" \ # TODO: is --with-system-expat okay?
+           " --with-system-expat" \
            " --with-dbmliborder=", env: env
 
   make env: env
