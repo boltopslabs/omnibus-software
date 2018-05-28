@@ -1,5 +1,5 @@
 #
-# Copyright 2012-2018, Chef Software Inc.
+# Copyright 2018 Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,21 +14,24 @@
 # limitations under the License.
 #
 
-name "bundler"
+### NOTE ###
+# We build this definition from source rather than installing from the
+# gem so the native extension builds against the correct ruby rather than shipping
+# a vendored library for each 2.x version of ruby, which is what is packaged
+# with the gem.
 
-license "MIT"
-license_file "https://raw.githubusercontent.com/bundler/bundler/master/LICENSE.md"
-skip_transitive_dependency_licensing true
+name "google-protobuf"
+default_version "v3.5.2"
 
+dependency "ruby"
 dependency "rubygems"
+
+source git: "https://github.com/google/protobuf.git"
+
+license :project_license
 
 build do
   env = with_standard_compiler_flags(with_embedded_path)
-
-  v_opts = "--version '#{version}'" unless version.nil?
-  gem [
-    "install bundler",
-    v_opts,
-    "--no-ri --no-rdoc --force",
-  ].compact.join(" "), env: env
+  gem "build google-protobuf.gemspec", env: env, cwd: "#{project_dir}/ruby"
+  gem "install google-protobuf-*.gem", env: env, cwd: "#{project_dir}/ruby"
 end
